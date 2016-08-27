@@ -1,6 +1,3 @@
-[![npm](https://img.shields.io/npm/v/react-hz.svg?style=flat-square)](https://www.npmjs.com/package/react-hz)
-[![Build Status](https://img.shields.io/travis/roman01la/react-horizon/master.svg?style=flat-square)](https://travis-ci.org/roman01la/react-horizon)
-
 # React Horizon
 
 Based on https://github.com/roman01la/react-horizon
@@ -22,7 +19,7 @@ class App extends Component {
 
 ## Installation
 ```
-$ npm i react-hz
+$ npm i gutenye/react-horizon @horizon/client
 ```
 
 React Horizon allows reactive dataflow between backend and React.js application. Client demand is declared in React components using Horizon's query API and data is synchronized thanks to [horizon.io](http://horizon.io/) realtime backend.
