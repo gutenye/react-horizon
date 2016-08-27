@@ -2,7 +2,7 @@
 
 Based on https://github.com/roman01la/react-horizon
 
-## Changes from original
+## Usage
 
 ```
 @connect({
@@ -15,20 +15,11 @@ class App extends Component {
     this.props.hz
 ```
 
-*React Horizon makes it easier to use your React application with horizon.io realtime backend*
+## Install
 
-## Installation
 ```
 $ npm i gutenye/react-horizon @horizon/client
 ```
-
-React Horizon allows reactive dataflow between backend and React.js application. Client demand is declared in React components using Horizon's query API and data is synchronized thanks to [horizon.io](http://horizon.io/) realtime backend.
-
-
-## Running example
-- Make sure you have installed RethinkDB and Horizon's CLI
-- Start server from `example` directory: `$ hz serve --dev`
-- Open http://127.0.0.1:8181 in your browser
 
 ## Usage
 
