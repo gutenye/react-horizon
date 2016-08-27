@@ -78,7 +78,6 @@ function connect() {
         key: "componentDidMount",
         value: function () {
           function componentDidMount() {
-            pd("didMount");
             this._subscribe(this.context.hz, this.props);
             this._createMutations(this.context.hz);
           }
@@ -89,7 +88,6 @@ function connect() {
         key: "componentWillUnmount",
         value: function () {
           function componentWillUnmount() {
-            pd("willUmount");
             this._unsubscribe();
           }
 
@@ -113,7 +111,6 @@ function connect() {
               results.forEach(function (result, i) {
                 data[keys[i]] = result;
               });
-              pd("setState", data);
               _this2.setState({ data: data, loading: false });
             });
           }
@@ -146,7 +143,6 @@ function connect() {
         key: "render",
         value: function () {
           function render() {
-            pd("render", this.state.loading);
             if (this.state.loading) return null;
             return _react2["default"].createElement(ReactComponent, _extends({}, this.props, this.state.data, this._mutations, { hz: this.context.hz }));
           }
