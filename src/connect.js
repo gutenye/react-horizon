@@ -16,7 +16,7 @@ export default function connect(subscriptions = {}, mutations = {}) {
 
         this.state = {
           data: {},
-          loaded: false,
+          loading: true,
         }
 
         this._subscribe = this._subscribe.bind(this)
@@ -52,7 +52,7 @@ export default function connect(subscriptions = {}, mutations = {}) {
           results.forEach((result, i) => {
             data[keys[i]] = result
           })
-          this.setState({data, loaded: true})
+          this.setState({data, loading: false})
         })
       }
       _unsubscribe(subscriptions) {
@@ -65,7 +65,7 @@ export default function connect(subscriptions = {}, mutations = {}) {
           })
       }
       render() {
-        if (!this.state.loaded)
+        if (this.state.loading)
           return null
         return <ReactComponent {...this.props} {...this.state.data} {...this._mutations} hz={this.context.hz}/>
       }
