@@ -45,6 +45,7 @@ function connect() {
 
         _this._subscriptions = [];
         _this._mutations = {};
+        _this._subscription;
 
         _this.state = {
           data: {},
@@ -66,31 +67,30 @@ function connect() {
 
           return shouldComponentUpdate;
         }()
-      }, {
-        key: "componentWillReceiveProps",
-        value: function () {
-          function componentWillReceiveProps(nextProps) {
-            this._unsubscribe(this._subscriptions);
-            this._subscribe(this.context.hz, nextProps);
-          }
+        /*
+        componentWillReceiveProps(nextProps) {
+          this._unsubscribe()
+          this._subscribe(this.context.hz, nextProps)
+        }
+        */
 
-          return componentWillReceiveProps;
-        }()
       }, {
-        key: "componentWillMount",
+        key: "componentDidMount",
         value: function () {
-          function componentWillMount() {
+          function componentDidMount() {
+            pd("didMount");
             this._subscribe(this.context.hz, this.props);
             this._createMutations(this.context.hz);
           }
 
-          return componentWillMount;
+          return componentDidMount;
         }()
       }, {
         key: "componentWillUnmount",
         value: function () {
           function componentWillUnmount() {
-            this._unsubscribe(this._subscriptions);
+            pd("willUmount");
+            this._unsubscribe();
           }
 
           return componentWillUnmount;
@@ -107,12 +107,13 @@ function connect() {
               _this2._subscriptions.push(subscription);
             });
 
-            _rxjs.Observable.combineLatest.apply(_rxjs.Observable, _toConsumableArray(this._subscriptions)).subscribe(function (results) {
+            this._subscription = _rxjs.Observable.combineLatest.apply(_rxjs.Observable, _toConsumableArray(this._subscriptions)).subscribe(function (results) {
               var data = {};
               var keys = Object.keys(subscriptions);
               results.forEach(function (result, i) {
                 data[keys[i]] = result;
               });
+              pd("setState", data);
               _this2.setState({ data: data, loading: false });
             });
           }
@@ -123,9 +124,7 @@ function connect() {
         key: "_unsubscribe",
         value: function () {
           function _unsubscribe(subscriptions) {
-            subscriptions.forEach(function (q) {
-              return q.unsubscribe();
-            });
+            this._subscription.unsubscribe();
           }
 
           return _unsubscribe;
@@ -147,6 +146,7 @@ function connect() {
         key: "render",
         value: function () {
           function render() {
+            pd("render", this.state.loading);
             if (this.state.loading) return null;
             return _react2["default"].createElement(ReactComponent, _extends({}, this.props, this.state.data, this._mutations, { hz: this.context.hz }));
           }
