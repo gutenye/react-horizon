@@ -6,19 +6,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-exports['default'] = connect;
+exports["default"] = connect;
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _shallowequal = require('shallowequal');
+var _shallowequal = require("shallowequal");
 
 var _shallowequal2 = _interopRequireDefault(_shallowequal);
 
-var _rxjs = require('rxjs');
+var _rxjs = require("rxjs");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -48,7 +48,7 @@ function connect() {
 
         _this.state = {
           data: {},
-          loaded: false
+          loading: true
         };
 
         _this._subscribe = _this._subscribe.bind(_this);
@@ -58,16 +58,16 @@ function connect() {
       }
 
       _createClass(_class, [{
-        key: 'shouldComponentUpdate',
+        key: "shouldComponentUpdate",
         value: function () {
           function shouldComponentUpdate(nextProps, nextState) {
-            return (0, _shallowequal2['default'])(nextProps, this.props) === false || (0, _shallowequal2['default'])(nextState, this.state) === false;
+            return (0, _shallowequal2["default"])(nextProps, this.props) === false || (0, _shallowequal2["default"])(nextState, this.state) === false;
           }
 
           return shouldComponentUpdate;
         }()
       }, {
-        key: 'componentWillReceiveProps',
+        key: "componentWillReceiveProps",
         value: function () {
           function componentWillReceiveProps(nextProps) {
             this._unsubscribe(this._subscriptions);
@@ -77,7 +77,7 @@ function connect() {
           return componentWillReceiveProps;
         }()
       }, {
-        key: 'componentWillMount',
+        key: "componentWillMount",
         value: function () {
           function componentWillMount() {
             this._subscribe(this.context.hz, this.props);
@@ -87,7 +87,7 @@ function connect() {
           return componentWillMount;
         }()
       }, {
-        key: 'componentWillUnmount',
+        key: "componentWillUnmount",
         value: function () {
           function componentWillUnmount() {
             this._unsubscribe(this._subscriptions);
@@ -96,7 +96,7 @@ function connect() {
           return componentWillUnmount;
         }()
       }, {
-        key: '_subscribe',
+        key: "_subscribe",
         value: function () {
           function _subscribe(hz, props) {
             var _this2 = this;
@@ -113,15 +113,14 @@ function connect() {
               results.forEach(function (result, i) {
                 data[keys[i]] = result;
               });
-              pd(1, results, data);
-              _this2.setState({ data: data, loaded: true });
+              _this2.setState({ data: data, loading: false });
             });
           }
 
           return _subscribe;
         }()
       }, {
-        key: '_unsubscribe',
+        key: "_unsubscribe",
         value: function () {
           function _unsubscribe(subscriptions) {
             subscriptions.forEach(function (q) {
@@ -132,7 +131,7 @@ function connect() {
           return _unsubscribe;
         }()
       }, {
-        key: '_createMutations',
+        key: "_createMutations",
         value: function () {
           function _createMutations(hz) {
             var _this3 = this;
@@ -145,12 +144,11 @@ function connect() {
           return _createMutations;
         }()
       }, {
-        key: 'render',
+        key: "render",
         value: function () {
           function render() {
-            pd(0, this.state.loaded);
-            if (!this.state.loaded) return null;
-            return _react2['default'].createElement(ReactComponent, _extends({}, this.props, this.state.data, this._mutations, { hz: this.context.hz }));
+            if (this.state.loading) return null;
+            return _react2["default"].createElement(ReactComponent, _extends({}, this.props, this.state.data, this._mutations, { hz: this.context.hz }));
           }
 
           return render;
