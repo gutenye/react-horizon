@@ -1,5 +1,5 @@
 {
-  "name": "react-hz",
+  "name": "react-horizon",
   "version": "0.3.2",
   "description": "React Horizon makes it easier to use your React application with horizon.io realtime backend",
   "main": "build/index.js",
@@ -17,12 +17,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/roman01la/react-horizon.git"
+    "url": "https://github.com/gutenye/react-horizon.git"
   },
   "bugs": {
-    "url": "https://github.com/roman01la/react-horizon/issues"
+    "url": "https://github.com/gutenye/react-horizon/issues"
   },
-  "homepage": "https://github.com/roman01la/react-horizon",
+  "homepage": "https://github.com/gutenye/react-horizon",
   "dependencies": {
     "babel-preset-airbnb": "^2.0.0",
     "babel-preset-stage-1": "^6.5.0",

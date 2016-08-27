@@ -5,6 +5,8 @@ Based on https://github.com/roman01la/react-horizon
 ## Usage
 
 ```
+import {connect} from "react-horizon"
+
 @connect({
   posts: (hz) => ..
 }, {
@@ -13,6 +15,8 @@ Based on https://github.com/roman01la/react-horizon
 class App extends Component {
   render() {
     this.props.hz
+
+render it when all props are fetched.
 ```
 
 ## Install
